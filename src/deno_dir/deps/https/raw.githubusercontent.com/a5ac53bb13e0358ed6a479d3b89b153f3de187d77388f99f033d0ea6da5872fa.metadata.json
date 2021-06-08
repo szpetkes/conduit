@@ -1,0 +1,26 @@
+{
+  "headers": {
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "deny",
+    "x-cache": "MISS",
+    "strict-transport-security": "max-age=31536000",
+    "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    "content-type": "text/plain; charset=utf-8",
+    "source-age": "0",
+    "etag": "W/\"0cc35aac8bcb5450a18e7ebc2a20fa0b8338cc91d908b108796c67706b1da7d9\"",
+    "accept-ranges": "bytes",
+    "x-served-by": "cache-muc13949-MUC",
+    "x-timer": "S1623182563.881929,VS0,VE179",
+    "x-cache-hits": "0",
+    "vary": "Authorization,Accept-Encoding",
+    "via": "1.1 varnish",
+    "x-content-type-options": "nosniff",
+    "access-control-allow-origin": "*",
+    "x-fastly-request-id": "e737ceb604e4dec921066604dfb6ed8ba373e93a",
+    "x-github-request-id": "A254:AB78:1EBB3C:1FACF8:60BFCCE2",
+    "cache-control": "max-age=300",
+    "expires": "Tue, 08 Jun 2021 20:07:43 GMT",
+    "date": "Tue, 08 Jun 2021 20:02:43 GMT"
+  },
+  "url": "https://raw.githubusercontent.com/drashland/services/v0.2.1/loggers/console_logger.ts"
+}
