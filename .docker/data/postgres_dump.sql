@@ -690,4 +690,3 @@ SET row_security = off;
 --
 -- PostgreSQL database cluster dump complete
 --
-
