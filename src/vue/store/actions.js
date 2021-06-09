@@ -187,6 +187,7 @@ export default {
 
   fetchArticles(context, params) {
     return new Promise((resolve) => {
+      console.log(params);
       axios
         .get("/articles", {
           params: {
@@ -199,6 +200,7 @@ export default {
         })
         .then((response) => {
           context.dispatch("setArticles", response.data.articles);
+          console.log(response.data.articles);
           resolve(response);
         })
         .catch((error) => {
@@ -229,6 +231,8 @@ export default {
       axios
         .get("/tags")
         .then(({ data }) => {
+          console.log("fetch tags complete");
+          commit("setTags", data);
           resolve(data);
         })
         .catch((error) => {
@@ -299,6 +303,11 @@ export default {
       articles.push(a);
     });
     context.commit("setArticles", articles);
+  },
+
+  setTags(context, tags) {
+    console.log("setTags called");
+    context.commit("setTags", tags);
   },
 
   setArticles(context, articles) {

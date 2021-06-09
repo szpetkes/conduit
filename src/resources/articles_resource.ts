@@ -436,7 +436,9 @@ class ArticlesResource extends BaseResource {
    * @return Promise<ArticleFilters>
    */
   protected async getQueryFilters(): Promise<ArticleFilters> {
+
     const author = this.request.getUrlQueryParam("author");
+    const tag = this.request.getUrlQueryParam("tag");
     //const offset = this.request.getUrlQueryParam("offset");
 
     const filters: ArticleFilters = {};
@@ -448,6 +450,10 @@ class ArticlesResource extends BaseResource {
       }
     }
 
+    if (tag) {
+        filters.tag = tag
+    }
+    console.log("filters: " + filters);
     return filters;
   }
 

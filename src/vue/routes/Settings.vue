@@ -51,11 +51,6 @@
               </button>
             </fieldset>
           </form>
-          <!-- Line break for logout button -->
-          <hr />
-          <button @click="logout" class="btn btn-outline-danger">
-            Or click here to logout.
-          </button>
         </div>
       </div>
     </div>

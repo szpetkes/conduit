@@ -21,6 +21,7 @@ export default {
 
   setIsAuthenticated(state, value) {
     state.is_authenticated = value;
+    console.log("setIsAuthenticated");
   },
 
   setProfile(state, profile) {
@@ -29,6 +30,7 @@ export default {
 
   setTags(state, tags) {
     state.tags = tags;
+    console.log("setting tags")
   },
 
   setUser(state, user) {

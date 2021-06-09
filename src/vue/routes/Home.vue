@@ -60,11 +60,12 @@
 <script>
 import { mapGetters } from "vuex";
 import Tag from "@/components/Tag.vue";
+import TagList from "@/components/TagList.vue";
 
 export default {
   name: "home",
   components: {
-    Tag
+    Tag, TagList
   },
   mounted() {
     this.$store.dispatch("fetchTags");
