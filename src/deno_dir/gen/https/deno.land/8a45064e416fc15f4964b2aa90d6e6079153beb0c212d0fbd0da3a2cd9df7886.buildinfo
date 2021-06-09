@@ -292,7 +292,7 @@
         "affectsGlobalScope": false
       },
       "https://deno.land/x/bcrypt@v0.2.4/src/worker.ts": {
-        "version": "6dbfec74a27fdae2874d7e8429dcedf34035f20a8999abc41a7ad7da8b1c1ec3",
+        "version": "b298a07e0c7574820aa9dd53143a146f9efc86055ba0b634fc01a064ea4af405",
         "signature": "e7917ed5665e82f0911d1dd56c0507f2aaef38e3dd71af51972ae75a031b5a2a",
         "affectsGlobalScope": false
       }
