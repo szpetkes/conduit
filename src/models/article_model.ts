@@ -22,6 +22,7 @@ export type ArticleEntity = {
 export type Filters = {
   author?: UserModel | null;
   offset?: number;
+  tag?: string;
 };
 
 /**
@@ -268,9 +269,14 @@ export class ArticleModel extends BaseModel {
    * @return Promise<ArticleMode[]|[]>
    */
   static async all(filters: Filters): Promise<ArticleModel[] | []> {
+    console.log(filters);
     let query = "SELECT * FROM articles ";
     if (filters.author) {
       query += ` WHERE author_id = '${filters.author.id}' `;
+    }
+    if (filters.tag) {
+      query += ` WHERE tags LIKE '%${filters.tag}%' `;
+      console.log(query)
     }
     if (filters.offset) {
       query += ` OFFSET ${filters.offset} `;
@@ -310,6 +316,24 @@ export class ArticleModel extends BaseModel {
         slug: typeof result.slug === "string" ? result.slug : "",
       };
       articles.push(createArticleModelObject(entity));
+    });
+    return articles;
+  }
+
+
+  static async allTags(): Promise<String[] | []> {
+    let query = "SELECT tags FROM articles ";
+    
+    const dbResult = await BaseModel.query(query);
+    if (dbResult.rowCount! < 1) {
+      return [];
+    }
+    if (dbResult.rows.length === 0) {
+      return [];
+    }
+    const articles = Array();
+    dbResult.rows.forEach((result) => {
+      articles.push(result.tags);
     });
     return articles;
   }

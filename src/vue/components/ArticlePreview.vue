@@ -1,24 +1,28 @@
 <template>
   <div class="article-preview">
     <ArticleMeta :article="article" />
+    
     <router-link :to="articleLink" class="preview-link">
       <h1 v-text="article.title" />
       <p v-text="article.description" />
+      <div class="tag-list">
+        <Tag v-for="(tag, index) in article.tags" :name="tag" :key="index">
+        </Tag>
+      </div>
       <span>Read more...</span>
-      <TagList :tags="article.tags" />
     </router-link>
   </div>
 </template>
 
 <script>
 import ArticleMeta from "./ArticleMeta.vue";
-import TagList from "./TagList.vue";
+import Tag from "./Tag.vue";
 
 export default {
   name: "ArticlePreview",
   components: {
     ArticleMeta,
-    TagList
+    Tag
   },
   props: {
     article: {
