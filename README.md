@@ -5,6 +5,10 @@
 This real world example application uses Deno, Drash, Vue, Webpack, PostgreSQL,
 and docker-compose.
 
+# Extensions
+
+no extensions
+
 # There is no need to locally build Docker images anymore
 
 Run this command:

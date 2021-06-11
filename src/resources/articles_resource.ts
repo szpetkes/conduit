@@ -7,12 +7,13 @@ import {
 } from "../models/article_model.ts";
 import { ArticlesFavoritesModel } from "../models/articles_favorites_model.ts";
 import UserModel from "../models/user_model.ts";
+import UserFavoritesModel from "../models/user_favorites_model.ts";
 
 class ArticlesResource extends BaseResource {
   static paths = [
-    "/articles",
-    "/articles/:slug",
-    "/articles/:slug/favorite",
+    "/api/articles",
+    "/api/articles/:slug",
+    "/api/articles/:slug/favorite",
   ];
 
   //////////////////////////////////////////////////////////////////////////////
@@ -95,14 +96,14 @@ class ArticlesResource extends BaseResource {
     articleIds: number[],
     entities: ArticleEntity[],
   ): Promise<ArticleEntity[]> {
+    console.log("addFavoritedToEntities");
     const currentUser = await this.getCurrentUser();
     if (!currentUser) {
       return entities;
     }
-
     const favs: ArticlesFavoritesModel[] = await ArticlesFavoritesModel
       .whereIn("article_id", articleIds);
-
+    
     entities = entities.map((entity: ArticleEntity) => {
       favs.forEach((favorite: ArticlesFavoritesModel) => {
         if (entity.id === favorite.article_id) {
@@ -264,8 +265,7 @@ class ArticlesResource extends BaseResource {
       inputArticle.body || "",
       inputArticle.tags || "",
     );
-    console.log("article to save:");
-    console.log(article);
+
     await article.save();
 
     if (!article) {
@@ -357,10 +357,9 @@ class ArticlesResource extends BaseResource {
   protected async getArticles(): Promise<Drash.Http.Response> {
     const articles: ArticleModel[] = await ArticleModel
       .all(await this.getQueryFilters());
-
     const articleIds: number[] = [];
     const authorIds: number[] = [];
-
+    
     let entities: ArticleEntity[] = articles.map((article: ArticleModel) => {
       if (authorIds.indexOf(article.author_id) === -1) {
         authorIds.push(article.author_id);
@@ -368,19 +367,88 @@ class ArticlesResource extends BaseResource {
       if (articleIds.indexOf(article.id) === -1) {
         articleIds.push(article.id);
       }
+
       return article.toEntity();
     });
 
+
+    // const favoritedAuthorIds: number[] = [];
+
+    // const userFavorites: UserFavoritesModel[] = await UserFavoritesModel
+    //   .where(await this.getQueryFilters())
+
     entities = await this.addAuthorsToEntities(authorIds, entities);
+
     entities = await this.addFavoritesCountToEntities(articleIds, entities);
+
     entities = await this.addFavoritedToEntities(articleIds, entities);
+
     entities = await this.filterEntitiesByFavoritedBy(articleIds, entities);
+    
+    //entities = await this.filterEntitiesByFavoritedAuthors(favoritedAuthorIds, entities);
 
     this.response.body = {
       articles: entities,
     };
+
     return this.response;
   }
+
+  // /**
+  //  * @description
+  //  *     Filter the entities by the favorited_by param.
+  //  *
+  //  * @param number[] articleIds
+  //  * @param ArticleEntity[] entities
+  //  *
+  //  * @return Promise<ArticleEntity[]>
+  //  */
+  //  protected async filterEntitiesByFavoritedAuthors(
+  //   favoritedAuthorIds: number[],
+  //   entities: ArticleEntity[],
+  // ): Promise<ArticleEntity[]> {
+  //   const favs: ArticlesFavoritesModel[] = await ArticlesFavoritesModel
+  //     .whereIn("article_id", articleIds);
+    
+  //   console.log(0);
+
+  //   const username = this.request.getUrlQueryParam("favorited_by");
+  //   if (!username) {
+  //     console.log(1);
+  //     return entities;
+  //   }
+  //   console.log(2);
+  //   const results = await UserModel.where({ username: username });
+  //   console.log(3);
+  //   if (results.length <= 0) {
+  //     console.log(4);
+  //     return entities;
+  //   }
+
+  //   const user = results[0];
+
+  //   const filtered: ArticleEntity[] = [];
+  //   console.log(5);
+  //   entities.forEach((entity: ArticleEntity) => {
+  //     favs.forEach((favorite: ArticlesFavoritesModel) => {
+  //       console.log("a");
+  //       if (entity.id === favorite.article_id) {
+  //         console.log("b");
+  //         if (user.id === favorite.user_id) {
+  //           console.log("c");
+  //           if (favorite.value === true) {
+  //             console.log("d");
+  //             entity.favorited = true;
+  //             filtered.push(entity);
+  //           }
+  //         }
+  //       }
+  //     });
+  //   });
+
+  //   return filtered;
+  // }
+
 
   /**
    * @description
@@ -397,27 +465,35 @@ class ArticlesResource extends BaseResource {
   ): Promise<ArticleEntity[]> {
     const favs: ArticlesFavoritesModel[] = await ArticlesFavoritesModel
       .whereIn("article_id", articleIds);
+    
+    console.log(0);
 
     const username = this.request.getUrlQueryParam("favorited_by");
     if (!username) {
+      console.log(1);
       return entities;
     }
-
+    console.log(2);
     const results = await UserModel.where({ username: username });
-
+    console.log(3);
     if (results.length <= 0) {
+      console.log(4);
       return entities;
     }
 
     const user = results[0];
 
     const filtered: ArticleEntity[] = [];
-
+    console.log(5);
     entities.forEach((entity: ArticleEntity) => {
       favs.forEach((favorite: ArticlesFavoritesModel) => {
+        console.log("a");
         if (entity.id === favorite.article_id) {
+          console.log("b");
           if (user.id === favorite.user_id) {
+            console.log("c");
             if (favorite.value === true) {
+              console.log("d");
               entity.favorited = true;
               filtered.push(entity);
             }
@@ -439,7 +515,7 @@ class ArticlesResource extends BaseResource {
 
     const author = this.request.getUrlQueryParam("author");
     const tag = this.request.getUrlQueryParam("tag");
-    //const offset = this.request.getUrlQueryParam("offset");
+    const offset = this.request.getUrlQueryParam("offset");
 
     const filters: ArticleFilters = {};
 
@@ -452,6 +528,11 @@ class ArticlesResource extends BaseResource {
 
     if (tag) {
         filters.tag = tag
+    }
+
+    if (offset) {
+        console.log("offset:",offset)
+        filters.offset = Number(offset)
     }
     console.log("filters: " + filters);
     return filters;

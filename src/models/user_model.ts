@@ -8,6 +8,7 @@ export type UserEntity = {
   password?: string;
   username: string;
   token?: null | string;
+  followed?: boolean;
 };
 
 /**
@@ -27,6 +28,7 @@ export type UserEntity = {
 export function createUserModelObject(user: {
   username: string;
   password: string;
+  followed: boolean;
   email: string;
   bio: string;
   image: string;
@@ -35,10 +37,12 @@ export function createUserModelObject(user: {
   return new UserModel(
     user.username,
     user.password,
+    user.followed,
     user.email,
     user.bio,
     user.image,
     user.id,
+
   );
 }
 
@@ -91,6 +95,8 @@ export class UserModel extends BaseModel {
    */
   public username: string;
 
+  public followed: boolean;
+
   //////////////////////////////////////////////////////////////////////////////
   // FILE MARKER - CONSTRCUTOR /////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
@@ -106,6 +112,7 @@ export class UserModel extends BaseModel {
   constructor(
     username: string,
     password: string,
+    followed: boolean = false,
     email: string,
     bio: string = "",
     image: string = "https://static.productionready.io/images/smiley-cyrus.jpg",
@@ -113,6 +120,7 @@ export class UserModel extends BaseModel {
   ) {
     super();
     this.id = id;
+    this.followed = followed;
     this.username = username;
     this.password = password;
     this.email = email;

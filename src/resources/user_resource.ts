@@ -5,8 +5,8 @@ import ValidationService from "../services/validation_service.ts";
 
 export default class UserResource extends BaseResource {
   static paths = [
-    "/user",
-    "/user/:username",
+    "/api/user",
+    "/api/user/:username",
   ];
 
   /**
