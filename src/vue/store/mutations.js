@@ -7,6 +7,10 @@ export default {
     state.articles = articles;
   },
 
+  setArticlesCount(state, articles_count) {
+    state.articles_count = articles_count;
+  },
+
   setComment(state, comment) {
     state.comment = comment;
   },

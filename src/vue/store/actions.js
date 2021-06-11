@@ -193,7 +193,7 @@ export default {
           params: {
             author: params.author,
             favorited_by: params.favorited,
-            offset: params.filters,
+            offset: params.offset,
             tag: params.tag,
             user_id: context.getters.user.id,
           },
@@ -201,6 +201,7 @@ export default {
         .then((response) => {
           context.dispatch("setArticles", response.data.articles);
           console.log(response.data.articles);
+          context.commit("setArticlesCount", response.data.articles_count)
           resolve(response);
         })
         .catch((error) => {

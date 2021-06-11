@@ -340,6 +340,42 @@ class ArticlesResource extends BaseResource {
     return this.response;
   }
 
+
+  protected async getArticlesCount(): Promise<number> {
+    return new Promise<number>(async (resolve) => {
+      const articles: ArticleModel[] = await ArticleModel
+        .all(await this.getQueryFilters(false));
+      const articleIds: number[] = [];
+      const authorIds: number[] = [];
+      
+      let entities: ArticleEntity[] = articles.map((article: ArticleModel) => {
+        if (authorIds.indexOf(article.author_id) === -1) {
+          authorIds.push(article.author_id);
+        }
+        if (articleIds.indexOf(article.id) === -1) {
+          articleIds.push(article.id);
+        }
+  
+        return article.toEntity();
+      });
+      // const favoritedAuthorIds: number[] = [];
+    
+      // const userFavorites: UserFavoritesModel[] = await UserFavoritesModel
+      //   .where(await this.getQueryFilters())
+    
+      entities = await this.addAuthorsToEntities(authorIds, entities);
+    
+      entities = await this.addFavoritesCountToEntities(articleIds, entities);
+    
+      entities = await this.addFavoritedToEntities(articleIds, entities);
+    
+      entities = await this.filterEntitiesByFavoritedBy(articleIds, entities);
+    
+      resolve(entities.length);
+    });
+  }
+
+
   /**
    * @description
    *     Get all articles--filtered or unfiltered.
@@ -355,8 +391,9 @@ class ArticlesResource extends BaseResource {
    * @return Promise<Drash.Http.Response>
    */
   protected async getArticles(): Promise<Drash.Http.Response> {
+    console.log(this.request)
     const articles: ArticleModel[] = await ArticleModel
-      .all(await this.getQueryFilters());
+      .all(await this.getQueryFilters(true));
     const articleIds: number[] = [];
     const authorIds: number[] = [];
     
@@ -386,9 +423,12 @@ class ArticlesResource extends BaseResource {
     entities = await this.filterEntitiesByFavoritedBy(articleIds, entities);
     
     //entities = await this.filterEntitiesByFavoritedAuthors(favoritedAuthorIds, entities);
+    
+    let count = await this.getArticlesCount();
 
     this.response.body = {
       articles: entities,
+      articles_count: count
     };
 
     return this.response;
@@ -511,7 +551,7 @@ class ArticlesResource extends BaseResource {
    *
    * @return Promise<ArticleFilters>
    */
-  protected async getQueryFilters(): Promise<ArticleFilters> {
+  protected async getQueryFilters(withOffset: boolean = false): Promise<ArticleFilters> {
 
     const author = this.request.getUrlQueryParam("author");
     const tag = this.request.getUrlQueryParam("tag");
@@ -530,7 +570,7 @@ class ArticlesResource extends BaseResource {
         filters.tag = tag
     }
 
-    if (offset) {
+    if (offset && withOffset) {
         console.log("offset:",offset)
         filters.offset = Number(offset)
     }

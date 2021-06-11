@@ -59,6 +59,7 @@ export default {
       "articles",
       "articles_count",
       "is_loading",
+      "pages",
     ]),
     params() {
       const { type } = this;
@@ -80,43 +81,43 @@ export default {
         filters
       };
     },
-    pages() {
-      if (this.isLoading || this.articles_count <= this.itemsPerPage) {
-        return [];
-      }
-      return [
-        ...Array(Math.ceil(this.articles_count / this.itemsPerPage)).keys()
-      ].map(e => e + 1);
-    },
+    // pages() {
+    //   if (this.isLoading || this.articles.length <= this.itemsPerPage) {
+    //     return [];
+    //   }
+    //   return [
+    //     ...Array(Math.ceil(this.articles.length / this.itemsPerPage)).keys()
+    //   ].map(e => e + 1);
+    // },
   },
   watch: {
     currentPage(newValue) {
-      this.params.filters.offset = (newValue - 1) * this.itemsPerPage;
-      this.fetchArticles();
+      this.params.offset = (newValue - 1) * this.itemsPerPage;
+      this.fetchArticles(this.params);
     },
     type() {
       this.resetPagination();
-      this.fetchArticles();
+      this.fetchArticles(this.params);
     },
     author() {
       this.resetPagination();
-      this.fetchArticles();
+      this.fetchArticles(this.params);
     },
     tag() {
       this.resetPagination();
-      this.fetchArticles();
+      this.fetchArticles(this.params);
     },
     favorited() {
       this.resetPagination();
-      this.fetchArticles();
+      this.fetchArticles(this.params);
     }
   },
   mounted() {
-    this.fetchArticles();
+    this.fetchArticles(this.params);
   },
   methods: {
     fetchArticles() {
-      this.$store.dispatch("fetchArticles", this.params.filters);
+      this.$store.dispatch("fetchArticles", this.params);
     },
     resetPagination() {
       this.params.offset = 0;

@@ -95,7 +95,9 @@ export default {
     ])
   },
   methods: {
-    
+    fetchProfile() {
+      this.$store.dispatch("fetchProfile", this.params.profile.username);
+    },
     isCurrentUser() {
       if (this.user.username && this.profile.username) {
         return this.user.username === this.profile.username;

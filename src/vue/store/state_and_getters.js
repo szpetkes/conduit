@@ -2,6 +2,7 @@ const state = {
   article: {},
   articles: [],
   articles_count: 0,
+  itemsPerPage: 10,
   comments: [],
   errors: {},
   is_authenticated: false,
@@ -39,7 +40,14 @@ const getters = {
   articles_count() {
     return state.articles_count;
   },
-
+  pages() {
+    if (state.articles_count <= state.itemsPerPage) {
+      return [];
+    }
+    return [
+      ...Array(Math.ceil(state.articles_count / state.itemsPerPage)).keys()
+    ].map(e => e + 1);
+  },
   comments() {
     return state.comments;
   },
