@@ -1,2 +1,18 @@
-regisztráció: az alkalmazásba be lehet regisztrálni, név, emailcím és jelszó megadásával
-bejelentkezés: az alkalmazásba be lehet jelentkezni egy meglévő felhasználói fiókkal
+regisztráció: 	Con_TC_01 Új regisztáció valós emailcímmel, „Welcome! Your registration was successful!” üzenet megjelenik
+regisztráció: 	Con_TC_02 Új regisztráció nem létező emailcímmel, "Registration failed!, Email must be a valid email." üzenet megjelenik. 
+bejelentkezés: 	Con_TC_03 Bejelentkezés majd kijelentkezés regisztrált felhasználói fiókkal
+				Con_TC_04 Bejelentkezés oldalról a regisztációs oldalra lépés és vissza
+profiladatok:	Con_TC_05 "Your Settings" oldalon profilkép, felhasználói név, leírás, Email cím és jelszó módosítása
+bejegyzés: 		Con_TC_06 Saját bejegyezés létrehozás, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők kitöltése
+				Con_TC_07 Saját bejegyzés szerkesztés, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők szerkesztése
+				Con_TC_08 Saját bejegyzés törlése
+				Con_TC_09 Más felhasználó blogbejegyzés olvasása, kedvelése, "Favorited Articles" oldalon megjelenik
+				Con_TC_10 Más felhasználó követése, "Your Feed" oldalon megjelennek a bejegyzései
+				Con_TC_11 "Global Feed" oldalon a bejegyzések csoportosítása, címke kiválasztásával
+kommentek:		Con_TC_12 Más felhasználó bejegyzéseihez kommentek írása, az megjelenik a bejegyezés alatt
+címke:			Con_TC_13 "Popular Tags" oldalon címke kiválasztása ami külön oldalon jelenik meg
+lapozás:		Con_TC_14 Lapozás az oldalon, 10 bejegyzés jelenése per oldal
+egyebek: 		Con_TC_15 Követés szív szín és sorszámozás megváltoztatása 
+				Con_TC_16  "Read more" felirat kiválasztása a "Global Feed" oldalon, választott bejegyzés oldalának megjelenése
+				Con_TC_17 "Conduit" felirat kiválasztása a lap alján , "Global Feed" oldal megjelenése
+				
