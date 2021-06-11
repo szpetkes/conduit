@@ -6,7 +6,7 @@ import ValidationService from "../services/validation_service.ts";
 
 class LoginResource extends BaseResource {
   static paths = [
-    "/users/login",
+    "/api/users/login",
   ];
 
   //////////////////////////////////////////////////////////////////////////////

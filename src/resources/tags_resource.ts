@@ -8,8 +8,8 @@ import {
 
 class TagsResource extends BaseResource {
   static paths = [
-    "/tags",
-    "/tags/:id",
+    "/api/tags",
+    "/api/tags/:id",
   ];
 
   public async GET() {

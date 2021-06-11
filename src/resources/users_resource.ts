@@ -6,7 +6,7 @@ import ValidationService from "../services/validation_service.ts";
 
 class RegisterResource extends BaseResource {
   static paths = [
-    "/users",
+    "/api/users",
   ];
 
   /**
@@ -61,6 +61,7 @@ class RegisterResource extends BaseResource {
     const User = new UserModel(
       username,
       await bcrypt.hash(rawPassword), // HASH THE PASSWORD
+      false,
       email,
     );
     const user = await User.save();
