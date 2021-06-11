@@ -1,0 +1,2 @@
+regisztráció: az alkalmazásba be lehet regisztrálni, név, emailcím és jelszó megadásával
+bejelentkezés: az alkalmazásba be lehet jelentkezni egy meglévő felhasználói fiókkal
