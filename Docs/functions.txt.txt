@@ -1,18 +1,18 @@
-regisztráció: 	Con_TC_01 Új regisztáció valós emailcímmel, „Welcome! Your registration was successful!” üzenet megjelenik
-regisztráció: 	Con_TC_02 Új regisztráció nem létező emailcímmel, "Registration failed!, Email must be a valid email." üzenet megjelenik. 
-bejelentkezés: 	Con_TC_03 Bejelentkezés majd kijelentkezés regisztrált felhasználói fiókkal
-				Con_TC_04 Bejelentkezés oldalról a regisztációs oldalra lépés és vissza
-profiladatok:	Con_TC_05 "Your Settings" oldalon profilkép, felhasználói név, leírás, Email cím és jelszó módosítása
-bejegyzés: 		Con_TC_06 Saját bejegyezés létrehozás, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők kitöltése
-				Con_TC_07 Saját bejegyzés szerkesztés, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők szerkesztése
-				Con_TC_08 Saját bejegyzés törlése
-				Con_TC_09 Más felhasználó blogbejegyzés olvasása, kedvelése, "Favorited Articles" oldalon megjelenik
-				Con_TC_10 Más felhasználó követése, "Your Feed" oldalon megjelennek a bejegyzései
-				Con_TC_11 "Global Feed" oldalon a bejegyzések csoportosítása, címke kiválasztásával
-kommentek:		Con_TC_12 Más felhasználó bejegyzéseihez kommentek írása, az megjelenik a bejegyezés alatt
-címke:			Con_TC_13 "Popular Tags" oldalon címke kiválasztása ami külön oldalon jelenik meg
-lapozás:		Con_TC_14 Lapozás az oldalon, 10 bejegyzés jelenése per oldal
-egyebek: 		Con_TC_15 Követés szív szín és sorszámozás megváltoztatása 
-				Con_TC_16  "Read more" felirat kiválasztása a "Global Feed" oldalon, választott bejegyzés oldalának megjelenése
-				Con_TC_17 "Conduit" felirat kiválasztása a lap alján , "Global Feed" oldal megjelenése
+regisztráció: 	CON_TC_001 Új regisztáció valós emailcímmel, „Welcome! Your registration was successful!” üzenet megjelenik
+regisztráció: 	CON_TC_002 Új regisztráció nem létező emailcímmel, "Registration failed!, Email must be a valid email." üzenet megjelenik. 
+bejelentkezés: 	CON_TC_003 Bejelentkezés majd kijelentkezés regisztrált felhasználói fiókkal
+				CON_TC_004 Bejelentkezés oldalról a regisztációs oldalra lépés és vissza
+profiladatok:	CON_TC_005 "Your Settings" oldalon profilkép, felhasználói név, leírás, Email cím és jelszó módosítása
+bejegyzés: 		CON_TC_006 Saját bejegyezés létrehozás, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők kitöltése
+				CON_TC_007 Saját bejegyzés szerkesztés, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők szerkesztése
+				CON_TC_008 Saját bejegyzés törlése
+				CON_TC_009 Más felhasználó blogbejegyzés olvasása, kedvelése, "Favorited Articles" oldalon megjelenik
+				CON_TC_010 Más felhasználó követése, "Your Feed" oldalon megjelennek a bejegyzései
+				CON_TC_011 "Global Feed" oldalon a bejegyzések csoportosítása, címke kiválasztásával
+kommentek:		CON_TC_012 Más felhasználó bejegyzéseihez kommentek írása, az megjelenik a bejegyezés alatt
+címke:			CON_TC_013 "Popular Tags" oldalon címke kiválasztása ami külön oldalon jelenik meg
+lapozás:		CON_TC_014 Lapozás az oldalon, 10 bejegyzés jelenése per oldal
+egyebek: 		CON_TC_015 Követés szív szín és sorszámozás megváltoztatása 
+				CON_TC_016 "Read more" felirat kiválasztása a "Global Feed" oldalon, választott bejegyzés oldalának megjelenése
+				CON_TC_017 "Conduit" felirat kiválasztása a lap alján , "Global Feed" oldal megjelenése
 				
