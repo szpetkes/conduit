@@ -53,14 +53,14 @@ class BaseResource extends Drash.Http.Resource {
       console.log(`Using cached User #${this.current_user.id}.`);
       return this.current_user;
     }
-
     const userId = (this.request.getUrlQueryParam("user_id") as string) ||
       (this.request.getBodyParam("user_id") as string);
 
     if (!userId) {
+      console.log("No user information in request. Returning null for getCurrentUser()");
       return null;
     }
-
+    console.log("Found user information in request.");
     const user = await UserModel.where({ id: userId });
 
     if (user.length <= 0) {

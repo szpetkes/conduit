@@ -6,8 +6,8 @@ import BaseResource from "./base_resource.ts";
 
 export default class ArticleCommentsResource extends BaseResource {
   static paths = [
-    "/articles/:slug/comments",
-    "/articles/comment/:id", // Only for deleting
+    "/api/articles/:slug/comments",
+    "/api/articles/comment/:id", // Only for deleting
   ];
 
   public async GET() {

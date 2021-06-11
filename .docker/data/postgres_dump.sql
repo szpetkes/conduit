@@ -214,14 +214,14 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.article_comments (
-    id integer NOT NULL,
-    article_id integer NOT NULL,
-    author_image character varying(255) NOT NULL,
-    author_id integer NOT NULL,
-    author_username character varying(255) NOT NULL,
-    body character varying(255) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+	id integer NOT NULL,
+	article_id integer NOT NULL,
+	author_image character varying(255) NOT NULL,
+	author_id integer NOT NULL,
+	author_username character varying(255) NOT NULL,
+	body text NOT NULL,
+	created_at timestamp without time zone NOT NULL,
+	updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -232,12 +232,12 @@ ALTER TABLE public.article_comments OWNER TO "user";
 --
 
 CREATE SEQUENCE public.article_comments_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	AS integer
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 ALTER TABLE public.article_comments_id_seq OWNER TO "user";
@@ -254,29 +254,44 @@ ALTER SEQUENCE public.article_comments_id_seq OWNED BY public.article_comments.i
 --
 
 CREATE TABLE public.articles (
-    id integer NOT NULL,
-    author_id integer NOT NULL,
-    title character varying(255) NOT NULL,
-    description character varying(255) NOT NULL,
-    body character varying(255) NOT NULL,
-    slug character varying(255) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    tags character varying(255)
+	id serial,
+	author_id integer NOT NULL,
+	title character varying(255) NOT NULL,
+	description character varying(255) NOT NULL,
+	body text NOT NULL,
+	slug character varying(255) NOT NULL,
+	created_at timestamp without time zone NOT NULL,
+	updated_at timestamp without time zone NOT NULL,
+	tags character varying(255)
 );
 
 
 ALTER TABLE public.articles OWNER TO "user";
+
+
+COPY public.articles (id, author_id, title, description, body, slug, created_at, updated_at, tags) FROM stdin;
+1	1	Lorem ipsum dolor sit amet	consectetur adipiscing elit	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Velit scelerisque in dictum non consectetur a erat. Sit amet justo donec enim diam vulputate. Id aliquet lectus proin nibh nisl condimentum id venenatis a. Eget gravida cum sociis natoque penatibus et magnis dis. Habitant morbi tristique senectus et netus et. Interdum consectetur libero id faucibus nisl tincidunt eget nullam. Aliquam purus sit amet luctus. Fringilla ut morbi tincidunt augue interdum velit. Neque sodales ut etiam sit. Quam viverra orci sagittis eu volutpat odio facilisis mauris. Ornare suspendisse sed nisi lacus sed. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet dui. Quam nulla porttitor massa id neque aliquam vestibulum morbi. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Turpis egestas integer eget aliquet.	lorem-ipsum-dolor-sit-amet	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	lorem,ipsum,dolor
+2	2	In nisl nisi scelerisque eu	 ultrices vitae auctor eu.	In nisl nisi scelerisque eu ultrices vitae auctor eu. Dolor sit amet consectetur adipiscing elit duis. Tortor dignissim convallis aenean et tortor at. Iaculis at erat pellentesque adipiscing commodo. Viverra suspendisse potenti nullam ac tortor. Elementum nibh tellus molestie nunc non blandit massa enim. Ultricies integer quis auctor elit sed. Varius vel pharetra vel turpis nunc eget lorem dolor. Sit amet massa vitae tortor condimentum. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Nascetur ridiculus mus mauris vitae ultricies leo integer.	In-nisl-nisi-scelerisque-eu	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	lorem,nisil
+3	1	Urna nunc id cursus metus.	Id leo in vitae turpis massa.	Urna nunc id cursus metus. Id leo in vitae turpis massa. Blandit turpis cursus in hac habitasse platea. Feugiat sed lectus vestibulum mattis ullamcorper. Diam sit amet nisl suscipit adipiscing bibendum est. Enim nunc faucibus a pellentesque sit amet porttitor eget dolor. Enim eu turpis egestas pretium aenean pharetra. Amet mattis vulputate enim nulla aliquet. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Risus commodo viverra maecenas accumsan lacus vel. Eu mi bibendum neque egestas congue quisque egestas diam in. Fermentum odio eu feugiat pretium nibh ipsum consequat.	Urna-nunc-id-cursus metus	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	urna,nunc
+4	1	Egestas egestas	fringilla phasellus faucibus scelerisque	Egestas egestas fringilla phasellus faucibus scelerisque. Sit amet dictum sit amet justo donec. Cum sociis natoque penatibus et magnis dis parturient montes. Habitasse platea dictumst quisque sagittis purus sit amet volutpat. Magna etiam tempor orci eu lobortis elementum nibh tellus molestie. Gravida arcu ac tortor dignissim convallis. Consequat nisl vel pretium lectus quam id leo in. Amet venenatis urna cursus eget. In est ante in nibh. Mauris commodo quis imperdiet massa. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus.	lorem-ipsum-dolor-sit-amet	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	lorem,ipsum,dolor
+5	3	Laoreet suspendisse interdum	consectetur libero id faucibus nisl tincidunt	Laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt. Enim sit amet venenatis urna cursus eget. Tristique senectus et netus et. Ipsum suspendisse ultrices gravida dictum fusce ut. Velit ut tortor pretium viverra suspendisse potenti nullam ac tortor. Sapien eget mi proin sed libero enim sed faucibus turpis. Ullamcorper malesuada proin libero nunc consequat interdum varius. Suscipit adipiscing bibendum est ultricies integer quis. Libero volutpat sed cras ornare arcu. In ante metus dictum at. Sed augue lacus viverra vitae congue eu consequat. Mi eget mauris pharetra et ultrices neque ornare aenean. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at. Blandit cursus risus at ultrices mi tempus. Ultrices gravida dictum fusce ut placerat. Sit amet justo donec enim. Malesuada fames ac turpis egestas integer eget.	Laoreet-suspendisse-interdum	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	laoreet, dorum,ipsum
+6	1	Nibh praesent tristique magna	sit amet purus gravida quis	Nibh praesent tristique magna sit amet purus gravida quis. Commodo viverra maecenas accumsan lacus vel facilisis volutpat est. Sed viverra tellus in hac habitasse. Eu augue ut lectus arcu bibendum at varius vel pharetra. Leo vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Gravida dictum fusce ut placerat orci nulla pellentesque dignissim. Varius sit amet mattis vulputate enim nulla aliquet porttitor. Egestas diam in arcu cursus euismod quis viverra nibh. Facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat. Enim nulla aliquet porttitor lacus luctus. At varius vel pharetra vel turpis.	Nibh-praesent-tristique-magna	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	loret,dolor
+7	2	Eget mi proin sed libero	enim sed faucibus turpis in	Eget mi proin sed libero enim sed faucibus turpis in. Sed odio morbi quis commodo odio aenean sed. Nibh mauris cursus mattis molestie a iaculis at. Tellus pellentesque eu tincidunt tortor. Massa vitae tortor condimentum lacinia quis. Scelerisque eu ultrices vitae auctor eu augue ut. Purus gravida quis blandit turpis cursus in hac habitasse platea. Ullamcorper sit amet risus nullam eget felis. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus urna neque. Pellentesque habitant morbi tristique senectus et netus. Vehicula ipsum a arcu cursus vitae. Amet luctus venenatis lectus magna fringilla urna porttitor rhoncus. Tristique senectus et netus et malesuada. Placerat duis ultricies lacus sed turpis tincidunt id aliquet. Dolor purus non enim praesent elementum facilisis leo. Blandit libero volutpat sed cras ornare arcu. Neque vitae tempus quam pellentesque. Elit eget gravida cum sociis.	Eget-mi-proin-sed-libero	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	loret,dolor,nibih
+8	1	Nunc lobortis mattis aliquam	faucibus purus in massa tempor	Nunc lobortis mattis aliquam faucibus purus in massa tempor. Amet consectetur adipiscing elit pellentesque. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Sed tempus urna et pharetra pharetra massa massa ultricies mi. Turpis egestas integer eget aliquet nibh praesent tristique magna sit. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. In est ante in nibh mauris. Vel facilisis volutpat est velit egestas. Elementum integer enim neque volutpat ac tincidunt vitae. Id velit ut tortor pretium viverra. Commodo viverra maecenas accumsan lacus. Mi bibendum neque egestas congue.	Nunc-lobortis-mattis-aliquam	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	mitast
+9	4	Cras sed felis eget velit	velit aliquet sagittis	Cras sed felis eget velit aliquet sagittis. Et sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque. Elementum pulvinar etiam non quam lacus suspendisse faucibus interdum. Morbi tincidunt augue interdum velit euismod in. Vitae justo eget magna fermentum iaculis eu non. Pellentesque diam volutpat commodo sed. Cras ornare arcu dui vivamus arcu. Sed arcu non odio euismod lacinia at quis risus sed. Volutpat blandit aliquam etiam erat. Id neque aliquam vestibulum morbi blandit. Non sodales neque sodales ut etiam sit amet. Elit eget gravida cum sociis natoque penatibus et magnis. Eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus. Suspendisse interdum consectetur libero id faucibus nisl tincidunt eget. Amet risus nullam eget felis eget nunc lobortis mattis. Volutpat consequat mauris nunc congue nisi vitae suscipit tellus.	Cras-sed-felis-eget-velit	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	dolor
+10	4	Elementum facilisis leo vel fringilla	est ullamcorper eget nulla	Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Sit amet nulla facilisi morbi tempus iaculis urna id. Bibendum ut tristique et egestas quis. Eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus. Volutpat commodo sed egestas egestas fringilla phasellus faucibus. Mauris a diam maecenas sed enim ut sem. Lacus vestibulum sed arcu non odio. In fermentum et sollicitudin ac orci phasellus egestas. Blandit aliquam etiam erat velit scelerisque. Sit amet nisl suscipit adipiscing. Feugiat sed lectus vestibulum mattis ullamcorper. Nisl suscipit adipiscing bibendum est ultricies integer. Nam libero justo laoreet sit amet cursus sit amet.	Elementum-facilisis-leo-velfringilla	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	leo
+11	4	Mi eget mauris pharetra et	A erat nam at lectus urna duis convallis	Mi eget mauris pharetra et. A erat nam at lectus urna duis convallis. Sit amet porttitor eget dolor morbi non. Adipiscing at in tellus integer feugiat scelerisque. A erat nam at lectus urna duis. Sit amet porttitor eget dolor morbi. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Tellus orci ac auctor augue mauris augue neque. Suspendisse potenti nullam ac tortor vitae purus. Ut consequat semper viverra nam libero justo laoreet. Iaculis nunc sed augue lacus viverra vitae congue eu consequat.	Mi-eget-mauris-pharetra-et	2021-06-10 06:54:54.758	2021-06-10 06:54:54.758	dolor
+\.
 
 --
 -- Name: articles_favorites; Type: TABLE; Schema: public; Owner: user
 --
 
 CREATE TABLE public.articles_favorites (
-    id integer NOT NULL,
-    article_id integer NOT NULL,
-    user_id integer NOT NULL,
-    value boolean NOT NULL
+	id integer NOT NULL,
+	article_id integer NOT NULL,
+	user_id integer NOT NULL,
+	value boolean NOT NULL
 );
 
 
@@ -287,12 +302,12 @@ ALTER TABLE public.articles_favorites OWNER TO "user";
 --
 
 CREATE SEQUENCE public.articles_favorites_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	AS integer
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 ALTER TABLE public.articles_favorites_id_seq OWNER TO "user";
@@ -308,13 +323,7 @@ ALTER SEQUENCE public.articles_favorites_id_seq OWNED BY public.articles_favorit
 -- Name: articles_id_seq; Type: SEQUENCE; Schema: public; Owner: user
 --
 
-CREATE SEQUENCE public.articles_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+
 
 
 ALTER TABLE public.articles_id_seq OWNER TO "user";
@@ -331,10 +340,10 @@ ALTER SEQUENCE public.articles_id_seq OWNED BY public.articles.id;
 --
 
 CREATE TABLE public.sessions (
-    id integer NOT NULL,
-    user_id integer NOT NULL,
-    session_one character varying(255) NOT NULL,
-    session_two character varying(255) NOT NULL
+	id integer NOT NULL,
+	user_id integer NOT NULL,
+	session_one character varying(255) NOT NULL,
+	session_two character varying(255) NOT NULL
 );
 
 
@@ -345,12 +354,12 @@ ALTER TABLE public.sessions OWNER TO "user";
 --
 
 CREATE SEQUENCE public.sessions_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	AS integer
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 ALTER TABLE public.sessions_id_seq OWNER TO "user";
@@ -367,14 +376,14 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 --
 
 CREATE TABLE public.users (
-    id integer NOT NULL,
-    username character varying(50) NOT NULL,
-    password character varying(100) NOT NULL,
-    email character varying(355) NOT NULL,
-    created_on timestamp without time zone,
-    last_login timestamp without time zone,
-    image character varying DEFAULT 'https://static.productionready.io/images/smiley-cyrus.jpg'::character varying NOT NULL,
-    bio character varying(280)
+	id integer NOT NULL,
+	username character varying(50) NOT NULL,
+	password character varying(100) NOT NULL,
+	email character varying(355) NOT NULL,
+	created_on timestamp without time zone,
+	last_login timestamp without time zone,
+	image character varying DEFAULT 'https://static.productionready.io/images/smiley-cyrus.jpg'::character varying NOT NULL,
+	bio character varying(280)
 );
 
 
@@ -385,12 +394,12 @@ ALTER TABLE public.users OWNER TO "user";
 --
 
 CREATE SEQUENCE public.users_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
+	AS integer
+	START WITH 1
+	INCREMENT BY 1
+	NO MINVALUE
+	NO MAXVALUE
+	CACHE 1;
 
 
 ALTER TABLE public.users_id_seq OWNER TO "user";
@@ -474,107 +483,43 @@ COPY public.sessions (id, user_id, session_one, session_two) FROM stdin;
 --
 
 COPY public.users (id, username, password, email, created_on, last_login, image, bio) FROM stdin;
-1	user1	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user1@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-2	user2	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user2@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-3	user3	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user3@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-4	user4	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user4@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-5	user5	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user5@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-6	user6	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user6@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-7	user7	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user7@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-8	user8	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user8@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-9	user9	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user9@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-10	user10	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user10@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-11	user11	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user11@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-12	user12	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user12@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-13	user13	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user13@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-14	user14	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user14@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-15	user15	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user15@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-16	user16	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user16@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-17	user17	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user17@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-18	user18	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user18@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-19	user19	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user19@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-20	user20	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user20@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-21	user21	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user21@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-22	user22	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user22@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-23	user23	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user23@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-24	user24	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user24@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-25	user25	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user25@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-26	user26	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user26@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-27	user27	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user27@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-28	user28	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user28@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-29	user29	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user29@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-30	user30	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user30@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-31	user31	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user31@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-32	user32	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user32@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-33	user33	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user33@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-34	user34	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user34@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-35	user35	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user35@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-36	user36	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user36@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-37	user37	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user37@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-38	user38	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user38@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-39	user39	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user39@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-40	user40	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user40@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-41	user41	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user41@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-42	user42	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user42@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-43	user43	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user43@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-44	user44	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user44@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-45	user45	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user45@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-46	user46	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user46@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-47	user47	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user47@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-48	user48	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user48@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-49	user49	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user49@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-50	user50	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user50@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-51	user51	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user51@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-52	user52	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user52@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-53	user53	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user53@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-54	user54	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user54@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-55	user55	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user55@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-56	user56	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user56@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-57	user57	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user57@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-58	user58	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user58@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-59	user59	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user59@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-60	user60	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user60@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-61	user61	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user61@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-62	user62	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user62@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-63	user63	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user63@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-64	user64	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user64@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-65	user65	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user65@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-66	user66	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user66@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-67	user67	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user67@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-68	user68	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user68@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-69	user69	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user69@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-70	user70	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user70@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-71	user71	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user71@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-72	user72	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user72@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-73	user73	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user73@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-74	user74	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user74@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-75	user75	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user75@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-76	user76	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user76@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-77	user77	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user77@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-78	user78	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user78@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-79	user79	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user79@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-80	user80	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user80@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-81	user81	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user81@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-82	user82	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user82@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-83	user83	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user83@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-84	user84	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user84@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-85	user85	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user85@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-86	user86	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user86@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-87	user87	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user87@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-88	user88	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user88@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-89	user89	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user89@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-90	user90	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user90@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-91	user91	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user91@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-92	user92	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user92@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-93	user93	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user93@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-94	user94	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user94@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-95	user95	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user95@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-96	user96	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user96@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-97	user97	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user97@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-98	user98	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user98@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-99	user99	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user99@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
-100	user100	$2a$10$Ha7shP2TNTmTR9tC8xdXg.Vta3w6IaHYnMNOxxfl5EG.cdwVFnTlW	user100@hotmail.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
+1	testuser1	$2a$10$Qo392XEiES.BKHo52.mYduWU.UY3XLpba8b5NyBdkd3Ph.kUM4xOm	testuser1@example.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
+2	testuser2	$2a$10$Qo392XEiES.BKHo52.mYduWU.UY3XLpba8b5NyBdkd3Ph.kUM4xOm	testuser2@example.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
+3	testuser3	$2a$10$Qo392XEiES.BKHo52.mYduWU.UY3XLpba8b5NyBdkd3Ph.kUM4xOm	testuser3@example.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
+4	testuser4	$2a$10$Qo392XEiES.BKHo52.mYduWU.UY3XLpba8b5NyBdkd3Ph.kUM4xOm	testuser4@example.com	2020-05-14 20:03:56.025651	\N	https://static.productionready.io/images/smiley-cyrus.jpg	\N
 \.
+
+
+--
+-- Name: user_favorites; Type: TABLE; Schema: public; Owner: user
+--
+
+CREATE TABLE public.user_favorites (
+	id serial,
+	favorited_user_id integer NOT NULL,
+	user_id integer NOT NULL,
+	value boolean NOT NULL
+);
+
+
+ALTER TABLE public.user_favorites OWNER TO "user";
+
+--
+-- Name: user_favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: user
+--
+
+
+
+
+ALTER TABLE public.user_favorites_id_seq OWNER TO "user";
+
+SELECT pg_catalog.setval('public.user_favorites_id_seq', 1, true);
+
+--
+-- Name: user_favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
+--
+
+ALTER SEQUENCE public.user_favorites_id_seq OWNED BY public.user_favorites.id;
 
 
 --
@@ -617,7 +562,7 @@ SELECT pg_catalog.setval('public.users_id_seq', 100, true);
 --
 
 ALTER TABLE ONLY public.article_comments
-    ADD CONSTRAINT article_comments_pkey PRIMARY KEY (id);
+	ADD CONSTRAINT article_comments_pkey PRIMARY KEY (id);
 
 
 --
@@ -625,7 +570,7 @@ ALTER TABLE ONLY public.article_comments
 --
 
 ALTER TABLE ONLY public.articles_favorites
-    ADD CONSTRAINT articles_favorites_pkey PRIMARY KEY (id);
+	ADD CONSTRAINT articles_favorites_pkey PRIMARY KEY (id);
 
 
 --
@@ -633,7 +578,7 @@ ALTER TABLE ONLY public.articles_favorites
 --
 
 ALTER TABLE ONLY public.articles
-    ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
+	ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
 
 
 --
@@ -641,15 +586,18 @@ ALTER TABLE ONLY public.articles
 --
 
 ALTER TABLE ONLY public.sessions
-    ADD CONSTRAINT sessions_pkey PRIMARY KEY (id);
+	ADD CONSTRAINT sessions_pkey PRIMARY KEY (id);
 
+
+ALTER TABLE ONLY public.user_favorites
+	ADD CONSTRAINT user_favorites_pkey PRIMARY KEY (id);
 
 --
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: user
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+	ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
 --
@@ -657,8 +605,10 @@ ALTER TABLE ONLY public.users
 --
 
 ALTER TABLE ONLY public.sessions
-    ADD CONSTRAINT sessions_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+	ADD CONSTRAINT sessions_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
 
+
+ALTER SEQUENCE public.articles_id_seq RESTART WITH 100;
 
 --
 -- PostgreSQL database dump complete
