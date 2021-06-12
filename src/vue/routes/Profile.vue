@@ -65,7 +65,7 @@
               </li>
             </ul>
           </div>
-          <router-view></router-view>
+          <router-view :key="$route.fullPath"></router-view>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Profile",
   mounted() {
-    console.log("route params",this.$route.params)
+    console.log(this.$route.params)
     this.$store.dispatch("fetchProfile", this.$route.params);
   },
   props: {
@@ -113,7 +113,11 @@ export default {
     }
   },
   watch: {
-    
+    $route(to, from) {
+      // react to route changes...
+      console.log("$route(to, from)", to, from)
+      this.$store.dispatch("fetchProfile", to.params);
+    },
     followed() {
       this.fetchProfile();
     }

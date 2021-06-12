@@ -7,7 +7,7 @@
     </router-link>
     <div class="info">
       <router-link
-        :to="{ name: 'profile', params: { username: authorUsername() } }"
+        :to="{ name: 'profile', params: { username: authorUsername() }, force: true}"
         class="author"
       >
         {{ authorUsername() }}

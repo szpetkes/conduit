@@ -221,7 +221,6 @@ export default {
         })
         .then((response) => {
           console.log("Profile fetched successfully. Setting profile.");
-          context.dispatch("unsetProfile");
           console.log(response)
           context.dispatch("setProfile", response.data.profile);
         })
