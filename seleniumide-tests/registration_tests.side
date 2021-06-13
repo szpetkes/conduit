@@ -133,7 +133,7 @@
         ["xpath=//div[@id='app']/div/div/div/div/form/fieldset/input", "xpath:idRelative"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "Starlord3"
+      "value": "Starlord4"
     }, {
       "id": "0d3f266f-4c76-4bfa-b7e3-65f0775af9df",
       "comment": "",
@@ -157,7 +157,7 @@
         ["xpath=//div[@id='app']/div/div/div/div/form/fieldset[2]/input", "xpath:idRelative"],
         ["xpath=//fieldset[2]/input", "xpath:position"]
       ],
-      "value": "test1@conduit.com"
+      "value": "test2@conduit.com"
     }, {
       "id": "7931be10-1020-482d-ab51-8d791f87b0ed",
       "comment": "",
@@ -217,7 +217,7 @@
         ["xpath=//div[@id='app']/div/div/div/div/form/fieldset[3]/input", "xpath:idRelative"],
         ["xpath=//fieldset[3]/input", "xpath:position"]
       ],
-      "value": "Starlord112"
+      "value": "Starlord113"
     }, {
       "id": "b5456c0d-96b4-48b8-81a3-c2b2aaac8cd1",
       "comment": "",
