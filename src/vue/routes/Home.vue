@@ -79,6 +79,11 @@ export default {
     tag() {
       return this.$route.params.tag;
     }
-  }
+  },
+  watch: {
+    $route(to, from) {
+        this.$store.dispatch("fetchTags");
+      }
+    }
 };
 </script>

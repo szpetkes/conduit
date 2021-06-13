@@ -1,5 +1,5 @@
 import BaseModel from "./base_model.ts";
-
+import UserModel from "./user_model.ts"
 export type UserFavoritesEntity = {
   // deno-lint-ignore camelcase
   favorited_user_id: number;
@@ -27,6 +27,10 @@ export function createUserFavoritesModelObject(
     inputObj.id
   );
 }
+
+export type Filters = {
+  favorited_by?: UserModel | null;
+};
 
 // (ebebbington) Error comes from this model adding the where method, that uses different
 // params compared to BaseModel's where method
@@ -136,8 +140,38 @@ export class UserFavoritesModel extends BaseModel {
     }
     return savedResult[0];
   }
+  
 
- 
+  static async all(userid: number): Promise<UserFavoritesModel[] | []> {
+    let query = "SELECT * FROM user_favorites ";
+    query += ` WHERE user_id = '${userid}' `;
+
+    console.log(query)
+    const dbResult = await BaseModel.query(query);
+    if (dbResult.rowCount! < 1) {
+      return [];
+    }
+    if (dbResult.rows.length === 0) {
+      return [];
+    }
+    const favs: Array<UserFavoritesModel> = [];
+    dbResult.rows.forEach((result) => {
+      const entity: UserFavoritesEntity = {
+        id: typeof result.id === "number" ? result.id : 0,
+        "favorited_user_id": typeof result.favorited_user_id === "number"
+          ? result.favorited_user_id
+          : 0,
+        "user_id": typeof result.user_id === "number"
+          ? result.user_id
+          : 0,
+        value: typeof result.value === "boolean"
+          ? result.value
+          : false
+      };
+      favs.push(createUserFavoritesModelObject(entity));
+    });
+    return favs;
+  }
   //////////////////////////////////////////////////////////////////////////////
   // FILE MARKER - METHODS - STATIC ////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
@@ -163,7 +197,7 @@ export class UserFavoritesModel extends BaseModel {
     // a user object type, but there's no way to type it like that the return type of whereIn can't be user
     const userFavorites: Array<UserFavoritesModel> = [];
     results.forEach((result) => {
-      console.log(result)
+
       const entity: UserFavoritesEntity = {
         "favorited_user_id": typeof result.favorited_user_id === "number"
           ? result.favorited_user_id
@@ -173,7 +207,7 @@ export class UserFavoritesModel extends BaseModel {
         value: typeof result.value === "boolean" ? result.value : false,
       };
       userFavorites.push(createUserFavoritesModelObject(entity));
-      console.log(userFavorites)
+
     });
     return userFavorites;
   }

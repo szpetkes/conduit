@@ -45,12 +45,22 @@
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
                 <router-link
+                  v-if="isCurrentUser()"
                   class="nav-link"
                   active-class="active"
                   exact
                   :to="{ name: 'profile', params: { username: profile.username } }"
                 >
                   My Articles
+                </router-link>
+                <router-link
+                  v-else
+                  class="nav-link"
+                  active-class="active"
+                  exact
+                  :to="{ name: 'profile', params: { username: profile.username } }"
+                >
+                  {{ profile.username }}'s Articles
                 </router-link>
               </li>
               <li class="nav-item">
@@ -115,8 +125,10 @@ export default {
   watch: {
     $route(to, from) {
       // react to route changes...
-      console.log("$route(to, from)", to, from)
-      this.$store.dispatch("fetchProfile", to.params);
+      if (to.name === "profile") {
+        console.log("$route(to, from)", to, from)
+        this.$store.dispatch("fetchProfile", to.params);
+      }
     },
     followed() {
       this.fetchProfile();

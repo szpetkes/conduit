@@ -141,7 +141,6 @@ class ProfilesResource extends BaseResource {
    */
    protected async deleteFollow(): Promise<Drash.Http.Response> {
     console.log("Handling action: deleteFollow.");
-    console.log(this.request)
     const currentUser = await this.getCurrentUser();
     if (!currentUser) {
       return this.errorResponse(

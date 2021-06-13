@@ -269,14 +269,13 @@ export class ArticleModel extends BaseModel {
    * @return Promise<ArticleMode[]|[]>
    */
   static async all(filters: Filters): Promise<ArticleModel[] | []> {
-    console.log(filters);
+
     let query = "SELECT * FROM articles ";
     if (filters.author) {
       query += ` WHERE author_id = '${filters.author.id}' `;
     }
     if (filters.tag) {
       query += ` WHERE tags LIKE '%${filters.tag}%' `;
-      console.log(query)
     }
     if (filters.offset) {
       query += ` OFFSET ${filters.offset} `;

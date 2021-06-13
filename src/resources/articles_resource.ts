@@ -361,7 +361,7 @@ class ArticlesResource extends BaseResource {
       // const favoritedAuthorIds: number[] = [];
     
       // const userFavorites: UserFavoritesModel[] = await UserFavoritesModel
-      //   .where(await this.getQueryFilters())
+      //   .all(await this.getQueryFilters())
     
       entities = await this.addAuthorsToEntities(authorIds, entities);
     
@@ -391,7 +391,14 @@ class ArticlesResource extends BaseResource {
    * @return Promise<Drash.Http.Response>
    */
   protected async getArticles(): Promise<Drash.Http.Response> {
-    console.log(this.request)
+    const currentUser = await this.getCurrentUser();
+    if (!currentUser) {
+      return this.errorResponse(
+        400,
+        "`user_id` field is required.",
+      );
+    }
+    console.log("getArticles", "filters", await this.getQueryFilters(true))
     const articles: ArticleModel[] = await ArticleModel
       .all(await this.getQueryFilters(true));
     const articleIds: number[] = [];
@@ -409,11 +416,17 @@ class ArticlesResource extends BaseResource {
     });
 
 
-    // const favoritedAuthorIds: number[] = [];
+    const favoritedAuthorIds: number[] = [];
 
-    // const userFavorites: UserFavoritesModel[] = await UserFavoritesModel
-    //   .where(await this.getQueryFilters())
+    const userFavorites: UserFavoritesModel[] = await UserFavoritesModel
+    .all(currentUser.id)
+    console.log("userFavorites", userFavorites)
 
+    userFavorites.forEach(element => {
+      favoritedAuthorIds.push(element.favorited_user_id)
+    });
+
+    console.log("favoritedAuthorIds", favoritedAuthorIds)
     entities = await this.addAuthorsToEntities(authorIds, entities);
 
     entities = await this.addFavoritesCountToEntities(articleIds, entities);
@@ -422,7 +435,7 @@ class ArticlesResource extends BaseResource {
 
     entities = await this.filterEntitiesByFavoritedBy(articleIds, entities);
     
-    //entities = await this.filterEntitiesByFavoritedAuthors(favoritedAuthorIds, entities);
+    // entities = await this.filterEntitiesByFavoritedAuthors(favoritedAuthorIds, entities);
     
     let count = await this.getArticlesCount();
 
@@ -434,60 +447,34 @@ class ArticlesResource extends BaseResource {
     return this.response;
   }
 
-  // /**
-  //  * @description
-  //  *     Filter the entities by the favorited_by param.
-  //  *
-  //  * @param number[] articleIds
-  //  * @param ArticleEntity[] entities
-  //  *
-  //  * @return Promise<ArticleEntity[]>
-  //  */
-  //  protected async filterEntitiesByFavoritedAuthors(
-  //   favoritedAuthorIds: number[],
-  //   entities: ArticleEntity[],
-  // ): Promise<ArticleEntity[]> {
-  //   const favs: ArticlesFavoritesModel[] = await ArticlesFavoritesModel
-  //     .whereIn("article_id", articleIds);
-    
-  //   console.log(0);
+  /**
+   * @description
+   *     Filter the entities by the favorited_by param.
+   *
+   * @param number[] articleIds
+   * @param ArticleEntity[] entities
+   *
+   * @return Promise<ArticleEntity[]>
+   */
+   protected async filterEntitiesByFavoritedAuthors(
+    favoritedAuthorIds: number[],
+    entities: ArticleEntity[],
+  ): Promise<ArticleEntity[]> {
+    console.log(entities)
+    const filtered: ArticleEntity[] = [];
+    entities.forEach((entity: ArticleEntity) => {
+      console.log(entity)
+      favoritedAuthorIds.forEach((favorite: number) => {
+        console.log(favorite)
+        if (entity.author_id === favorite) {
+            console.log("pushed", entity)
+            filtered.push(entity);
+        }
+      });
+    });
 
-  //   const username = this.request.getUrlQueryParam("favorited_by");
-  //   if (!username) {
-  //     console.log(1);
-  //     return entities;
-  //   }
-  //   console.log(2);
-  //   const results = await UserModel.where({ username: username });
-  //   console.log(3);
-  //   if (results.length <= 0) {
-  //     console.log(4);
-  //     return entities;
-  //   }
-
-  //   const user = results[0];
-
-  //   const filtered: ArticleEntity[] = [];
-  //   console.log(5);
-  //   entities.forEach((entity: ArticleEntity) => {
-  //     favs.forEach((favorite: ArticlesFavoritesModel) => {
-  //       console.log("a");
-  //       if (entity.id === favorite.article_id) {
-  //         console.log("b");
-  //         if (user.id === favorite.user_id) {
-  //           console.log("c");
-  //           if (favorite.value === true) {
-  //             console.log("d");
-  //             entity.favorited = true;
-  //             filtered.push(entity);
-  //           }
-  //         }
-  //       }
-  //     });
-  //   });
-
-  //   return filtered;
-  // }
+    return filtered;
+  }
 
 
   /**
@@ -506,34 +493,34 @@ class ArticlesResource extends BaseResource {
     const favs: ArticlesFavoritesModel[] = await ArticlesFavoritesModel
       .whereIn("article_id", articleIds);
     
-    console.log(0);
+
 
     const username = this.request.getUrlQueryParam("favorited_by");
     if (!username) {
-      console.log(1);
+
       return entities;
     }
-    console.log(2);
+
     const results = await UserModel.where({ username: username });
-    console.log(3);
+
     if (results.length <= 0) {
-      console.log(4);
+
       return entities;
     }
 
     const user = results[0];
 
     const filtered: ArticleEntity[] = [];
-    console.log(5);
+
     entities.forEach((entity: ArticleEntity) => {
       favs.forEach((favorite: ArticlesFavoritesModel) => {
-        console.log("a");
+
         if (entity.id === favorite.article_id) {
-          console.log("b");
+
           if (user.id === favorite.user_id) {
-            console.log("c");
+
             if (favorite.value === true) {
-              console.log("d");
+
               entity.favorited = true;
               filtered.push(entity);
             }
@@ -557,6 +544,7 @@ class ArticlesResource extends BaseResource {
     const tag = this.request.getUrlQueryParam("tag");
     const offset = this.request.getUrlQueryParam("offset");
 
+
     const filters: ArticleFilters = {};
 
     if (author) {
@@ -571,10 +559,8 @@ class ArticlesResource extends BaseResource {
     }
 
     if (offset && withOffset) {
-        console.log("offset:",offset)
         filters.offset = Number(offset)
     }
-    console.log("filters: " + filters);
     return filters;
   }
 
