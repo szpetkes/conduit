@@ -15,4 +15,3 @@ lapozás:		CON_TC_014 Lapozás az oldalon, 10 bejegyzés jelenése per oldal
 egyebek: 		CON_TC_015 Követés szív szín és sorszámozás megváltoztatása 
 				CON_TC_016 "Read more" felirat kiválasztása a "Global Feed" oldalon, választott bejegyzés oldalának megjelenése
 				CON_TC_017 "Conduit" felirat kiválasztása a lap alján , "Global Feed" oldal megjelenése
-				
