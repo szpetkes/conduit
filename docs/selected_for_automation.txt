@@ -1,19 +1,40 @@
-A001,CON_TC_001_login, felület automatizázás, mert ismételt végrehajtást tartalmaz
-A002,CON_TC_001 Új regisztáció valós emailcímmel, „Welcome! Your registration was successful!” üzenet megjelenik
-A003,CON_TC_002 Új regisztráció nem létező emailcímmel, "Registration failed!, Email must be a valid email." üzenet megjelenik. 
-A004,CON_TC_003 Bejelentkezés majd kijelentkezés regisztrált felhasználói fiókkal
-A005,CON_TC_004 Bejelentkezés oldalról a regisztációs oldalra lépés és vissza
-A005,CON_TC_005 "Your Settings" oldalon profilkép, felhasználói név, leírás, Email cím és jelszó módosítása
-A006,CON_TC_006 Saját bejegyezés létrehozás, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők kitöltése
-A007,CON_TC_007 Saját bejegyzés szerkesztés, "Article title", "What's this article about?", "Write your article (in markdown)", "Enter tags" mezők szerkesztése
-A008,CON_TC_008 Saját bejegyzés törlése
-A010,CON_TC_009 Más felhasználó blogbejegyzés olvasása, kedvelése, "Favorited Articles" oldalon megjelenik
-A011,CON_TC_010 Más felhasználó követése, "Your Feed" oldalon megjelennek a bejegyzései
-A012,CON_TC_011 "Global Feed" oldalon a bejegyzések csoportosítása, címke kiválasztásával
-A013,CON_TC_012 Más felhasználó bejegyzéseihez kommentek írása, az megjelenik a bejegyezés alatt
-A014,CON_TC_013 "Popular Tags" oldalon címke kiválasztása ami külön oldalon jelenik meg
-A015,CON_TC_014 Lapozás az oldalon, 10 bejegyzés jelenése per oldal
-A016,CON_TC_015 Követés szív szín és sorszámozás megváltoztatása 
-A017,CON_TC_016 "Read more" felirat kiválasztása a "Global Feed" oldalon, választott bejegyzés oldalának megjelenése
-A018,CON_TC_017 "Conduit" felirat kiválasztása a lap alján , "Global Feed" oldal megjelenése
-				
+Critical test cases selected for automation:
+
+A000, CON_TC_000 API testing, Conduit "A place to share your knowledge." Home screen functions appears without Sign in, 
+A001, CON_TC_001 API testing, New user registration , valid email address, “Welcome! Your registration was successful! ” message is displayed 
+A002, CON_TC_002 API testing, New user registration, non valid email address, "Registration failed!, Email must be a valid email." message is displayed 
+A003, CON_TC_003 GUI testing, Log in and log out with a registered user account
+A004, CON_TC_027 API and GUI test, Edit profile settings, add picture. Registration and after that lots of steps including many data changes
+A005, CON_TC_028 API and GUI test, Edit profile settings, change picture. Registration and after that lots of steps including many data changes
+A006, CON_TC_029 API and GUI test, Edit profile settings, change email. Registration and after that lots of steps including many data changes
+A007, CON_TC_030 API and GUI test, Edit profile settings, change password. Registration and after that lots of steps including many data changes
+A008, CON_TC_031 API and GUI test, Edit profile settings, change username. Registration and after that lots of steps including many data changes
+A009, CON_TC_014 API and GUI test including Integration test, Create a new post as a logged in user, with tag. Many data changes
+A010, CON_TC_020 GUI and Integration test, Article details view, article title click. Registration and after that lots of steps
+A011, CON_TC_021 GUI and Integration test, Article details view, Read more click. Registration and after that lots of steps
+A012, CON_TC_023 GUI test, Edit existing Blog Post. Lots of steps including many data changes
+A013, CON_TC_018 API and GUI test including Integration test, Delete blog post. Lots of steps including many data changes
+A014, CON_TC_016 API and GUI test including Integration test, Create a new post comment. Lots of steps including many data changes
+A015, CON_TC_017 API and GUI test including Integration test, Delete a new post comment. Lots of steps including many data changes
+A016, CON_TC_024 API and GUI test, Select a Tag listing in Popular Tags
+
+Test cases not selected for automation, second importance, but possible upon user or developer request:
+
+CON_TC_004 New user registration, existing user name, new email address
+CON_TC_005 New user registration with no characters
+CON_TC_006 User login with registered data
+CON_TC_007 User login with registered data, no password
+CON_TC_008 User login with registered data, wrong password
+CON_TC_009 User login with registered data, wrong email
+CON_TC_012 Follow other authors
+CON_TC_013 Unselect Followed authors
+CON_TC_015 Create a new post as logged in user without characters
+CON_TC_019 Add multiple tag to a new post  
+CON_TC_022 Article details view, tag button click
+CON_TC_025 Favorite heart color and numbering after marking and unmarking
+CON_TC_026 Blog Post marking as Favorite and Unfavorite on the blog post page
+CON_TC_032 Paginated Blog Post Feed
+CON_TC_033 Conduit Home page appears clickink Conduit link at at the bottom of the page 				
+CON_TC_010 Scrolling the Global Feed page, 10 entries per page
+CON_TC_011 Select "Conduit" at the bottom of the page, "Global Feed" page will appear
+CON_TC_034 Select "Read more" on the "Global Feed" page, display the page of the selected entry
