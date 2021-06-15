@@ -8,6 +8,10 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+        
+        - name: Builds and Starts
+        run: |
+          docker-compose up -d
 
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
