@@ -42,4 +42,25 @@ jobs:
           
       - name: Run Tests
         run: |
-          selenium-side-runner -c "browserName=chrome goog:chromeOptions.args=[disable-infobars, headless]" seleniumide-tests/registration.side     
+          selenium-side-runner -c "browserName=chrome goog:chromeOptions.args=[disable-infobars, headless]" seleniumide-tests/registration.side
+          
+      - name: Test with pytest
+      run: |
+        pytest --alluredir=allure-results
+        
+    - name: Allure Report action from marketplace
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: allure-results
+        allure-history: allure-history
+        keep_reports: 920
+        
+    - name: Deploy Report to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: allure-history
+        
