@@ -45,8 +45,8 @@ jobs:
           selenium-side-runner -c "browserName=chrome goog:chromeOptions.args=[disable-infobars, headless]" seleniumide-tests/registration.side
           
       - name: Test with pytest
-      run: |
-        pytest --alluredir=allure-results
+         run: |
+          pytest --alluredir=allure-results
         
     - name: Allure Report action from marketplace
       uses: simple-elf/allure-report-action@master
