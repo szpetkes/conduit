@@ -1,0 +1,47 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "children" : [ {
+    "name" : "Test defects",
+    "children" : [ {
+      "name" : "NameError: name 'webdriver' is not defined",
+      "children" : [ {
+        "name" : "test_datachange",
+        "uid" : "7385af93862191fc",
+        "parentUid" : "15f66eaffc79464243bc89b364b27684",
+        "status" : "broken",
+        "time" : {
+          "start" : 1627576328122,
+          "stop" : 1627576328122,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "15f66eaffc79464243bc89b364b27684"
+    } ],
+    "uid" : "bdbf199525818fae7a8651db9eafe741"
+  }, {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert 2 == 4\n +  where 2 = len([<selenium.webdriver.remote.webelement.WebElement (session=\"d9d324cb621796d9bc5e1dc76fb3156e\", element=\"47994db1-ecb5-...te.webelement.WebElement (session=\"d9d324cb621796d9bc5e1dc76fb3156e\", element=\"9c1b360c-8909-43be-8999-2b435d9a9ba9\")>])",
+      "children" : [ {
+        "name" : "test_pagination",
+        "uid" : "75b8e09944e0ad25",
+        "parentUid" : "7efa20f93716c01518c8ebd33cd7fd61",
+        "status" : "failed",
+        "time" : {
+          "start" : 1627576446246,
+          "stop" : 1627576454102,
+          "duration" : 7856
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "7efa20f93716c01518c8ebd33cd7fd61"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  } ],
+  "name" : "categories"
+}
