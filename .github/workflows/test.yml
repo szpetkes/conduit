@@ -15,6 +15,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
         
+      - name: Builds and Starts
+        run: |
+          docker-compose up -d     
+       
+       - name: Sleep for 45 seconds
+        run: sleep 60s 
+        shell: bash
+      
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -27,39 +35,11 @@ jobs:
       
       - name: Install Chrome
         run: |
-          sudo apt install google-chrome-stable
-          
-      - name: Install seleniumbase
-        run: pip install seleniumbase
-
-      - name: Install chromedriver
-        run: |
-          seleniumbase install chromedriver
-          
-      - name: install Nodejs
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install Selenium Side Runner
-        run: |
-          npm install -g selenium-side-runner
-          
-      - name: Run Tests
-        run: |
-          selenium-side-runner -c "browserName=chrome goog:chromeOptions.args=[disable-infobars, headless]" seleniumide-tests/post.side
-        
-      - name: Builds and Starts
-        run: |
-          docker-compose up -d   
-      
-      - name: Sleep for 45 seconds
-        run: sleep 45s 
-        shell: bash
+            sudo apt install google-chrome-stable
       
       - name: Test with pytest
         run: |
-        pytest --alluredir=allure-results
+            pytest --alluredir=allure-results
           
       - name: Collect docker logs 
         uses: jwalton/gh-docker-logs@v1 
