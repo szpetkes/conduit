@@ -17,14 +17,17 @@ input_data = ["L", f"SL{random.randint(10, 1000)}@conduit.hu", "Starlord2."]
 data_of_new_article = ["test_title", "test_about", "test_article text", "test_tag"]
 
 
-def registration_process():
-    driver.find_element_by_xpath("//a[@href='#/register']").click()
-    for i in range(len(input_data)):
-        driver.find_element_by_xpath(f"//fieldset[{i + 1}]/input").send_keys(input_data[i])
+def test_data_from_file():
+    def registration_process():
+        driver.find_element_by_xpath("//a[@href='#/register']").click()
+        for i in range(len(input_data)):
+
+    driver.find_element_by_xpath(f"//fieldset[{i + 1}]/input").send_keys(input_data[i])
     driver.find_element_by_tag_name("button").click()
 
+    registration_process()
 
-registration_process()
+
 time.sleep(3)
 
 driver.find_element_by_xpath("//div[@tabindex='-1']/div/div[4]/div/button").click()

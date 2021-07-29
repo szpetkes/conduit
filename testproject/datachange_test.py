@@ -8,12 +8,15 @@ def test_data_change():
 
     opt = Options()
     opt.headless = True
+
+
+def test_datachange():
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=opt)
 
     driver.get('http://localhost:1667/')
 
     input_data = ["".join([random.choice(string.ascii_lowercase) for _ in range(5)]),
-                  f"{random.choice(string.ascii_lowercase)}{random.randint(10, 1000)}@mail.hu", "Pw123456"]
+                  f"{random.choice(string.ascii_lowercase)}{random.randint(10, 1000)}@conduit.hu", "Starlord2"]
     test_data_for_modification = "It's a test sentence."
 
     def registration_process():
