@@ -13,6 +13,7 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=opt)
 driver = webdriver.Chrome()
 driver.get('http://localhost:1667/')
 
+
 #input_data = ["L", f"SL{random.randint(10, 1000)}@conduit.hu", "Starlord2."]
 #data_of_new_article = ["test_title", "test_about", "test_article text", "test_tag"]
 #
