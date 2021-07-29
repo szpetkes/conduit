@@ -12,16 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
   steps:
-    - name: Check out repository code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Builds and Starts
       run: |
         docker-compose up -d
 
     - name: Sleep for 45 seconds
-    run: sleep 60s
-    shell: bash
+      run: sleep 60s
+      shell: bash
 
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
