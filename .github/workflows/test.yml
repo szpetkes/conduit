@@ -11,9 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
-  steps:
-- name: Start Actions
-- uses: actions/checkout@v2
+    steps:
+    - name: Start Actions
+    - uses: actions/checkout@v2
 
   - name: Builds and Starts
     run: |
