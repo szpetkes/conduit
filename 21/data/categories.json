@@ -1,0 +1,64 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "children" : [ {
+    "name" : "Test defects",
+    "children" : [ {
+      "name" : "selenium.common.exceptions.WebDriverException: Message: unknown error: Chrome failed to start: exited abnormally.\n  (unknown error: DevToolsActivePort file doesn't exist)\n  (The process started from chrome location /usr/bin/google-chrome is no longer running, so ChromeDriver is assuming that Chrome has crashed.)",
+      "children" : [ {
+        "name" : "test_data_from_file",
+        "uid" : "6ca2806c43f36190",
+        "parentUid" : "e4a7d37349393b5a9e33d7e741170037",
+        "status" : "broken",
+        "time" : {
+          "start" : 1628062759167,
+          "stop" : 1628062770757,
+          "duration" : 11590
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "e4a7d37349393b5a9e33d7e741170037"
+    }, {
+      "name" : "NameError: name 'webdriver' is not defined",
+      "children" : [ {
+        "name" : "test_datachange",
+        "uid" : "5254898e28dcba20",
+        "parentUid" : "15f66eaffc79464243bc89b364b27684",
+        "status" : "broken",
+        "time" : {
+          "start" : 1628062783170,
+          "stop" : 1628062783170,
+          "duration" : 0
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "15f66eaffc79464243bc89b364b27684"
+    } ],
+    "uid" : "bdbf199525818fae7a8651db9eafe741"
+  }, {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert 2 == 4\n +  where 2 = len([<selenium.webdriver.remote.webelement.WebElement (session=\"1b067e8fd428dddbd766611e6675840f\", element=\"4b012425-c202-...te.webelement.WebElement (session=\"1b067e8fd428dddbd766611e6675840f\", element=\"2549ba13-d4f0-45c0-b5ff-019559500e30\")>])",
+      "children" : [ {
+        "name" : "test_pagination",
+        "uid" : "324a31e7aa4da838",
+        "parentUid" : "246f7ffcbcf5578efdc5150a271c239e",
+        "status" : "failed",
+        "time" : {
+          "start" : 1628062901962,
+          "stop" : 1628062909858,
+          "duration" : 7896
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "246f7ffcbcf5578efdc5150a271c239e"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  } ],
+  "name" : "categories"
+}
