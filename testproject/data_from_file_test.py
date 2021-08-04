@@ -31,13 +31,13 @@ driver.find_element_by_xpath("//div[@tabindex='-1']/div/div[4]/div/button").clic
 time.sleep(2)
 
 
-def writing_of_new_article_process(input_title, input_about, input_text, input_tag):
+def writing_of_new_article_process(title, about, text, tag):
     driver.find_element_by_xpath("//a[@href='#/editor']").click()
     time.sleep(2)
-    driver.find_element_by_xpath("//input[@placeholder='Article Title']").send_keys(input_title)
-    driver.find_element_by_xpath("//input[starts-with(@placeholder,'What')]").send_keys(input_about)
-    driver.find_element_by_xpath("//textarea[starts-with(@placeholder,'Write')]").send_keys(input_text)
-    driver.find_element_by_xpath("//input[@placeholder='Enter tags']").send_keys(input_tag)
+    driver.find_element_by_xpath("//input[@placeholder='Article Title']").send_keys(title)
+    driver.find_element_by_xpath("//input[starts-with(@placeholder,'What')]").send_keys(about)
+    driver.find_element_by_xpath("//textarea[starts-with(@placeholder,'Write')]").send_keys(text)
+    driver.find_element_by_xpath("//input[@placeholder='Enter tags']").send_keys(tag)
     time.sleep(1)
     driver.find_element_by_xpath("//button[@class='btn btn-lg pull-xs-right btn-primary']").click()
     time.sleep(1)
