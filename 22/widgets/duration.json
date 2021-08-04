@@ -1,0 +1,111 @@
+[ {
+  "uid" : "a6b4893f020717b2",
+  "name" : "test_registration",
+  "time" : {
+    "start" : 1628064864269,
+    "stop" : 1628064873275,
+    "duration" : 9006
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "187dc9109af66cfc",
+  "name" : "test_data_delete",
+  "time" : {
+    "start" : 1628064696006,
+    "stop" : 1628064761666,
+    "duration" : 65660
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "c9f5f7984c93f73d",
+  "name" : "test_data_save",
+  "time" : {
+    "start" : 1628064767605,
+    "stop" : 1628064825760,
+    "duration" : 58155
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "da41f4ef56275150",
+  "name" : "test_data_change",
+  "time" : {
+    "start" : 1628064665292,
+    "stop" : 1628064695999,
+    "duration" : 30707
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7bf00a161063dab",
+  "name" : "test_data_list",
+  "time" : {
+    "start" : 1628064654225,
+    "stop" : 1628064665289,
+    "duration" : 11064
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "7165be5c764d19f7",
+  "name" : "test_statement",
+  "time" : {
+    "start" : 1628064873279,
+    "stop" : 1628064877905,
+    "duration" : 4626
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "1df4f4a977c91953",
+  "name" : "test_pagination",
+  "time" : {
+    "start" : 1628064841784,
+    "stop" : 1628064864266,
+    "duration" : 22482
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "34113097add1633c",
+  "name" : "test_data_from_file",
+  "time" : {
+    "start" : 1628064651210,
+    "stop" : 1628064654131,
+    "duration" : 2921
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "9f47689b2e39e311",
+  "name" : "test_logout",
+  "time" : {
+    "start" : 1628064831616,
+    "stop" : 1628064841781,
+    "duration" : 10165
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ed4a10b60cc4a4fd",
+  "name" : "test_data_input",
+  "time" : {
+    "start" : 1628064761668,
+    "stop" : 1628064767602,
+    "duration" : 5934
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "85eba3b7519cfac7",
+  "name" : "test_login",
+  "time" : {
+    "start" : 1628064825764,
+    "stop" : 1628064831613,
+    "duration" : 5849
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]
