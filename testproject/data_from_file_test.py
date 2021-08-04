@@ -9,7 +9,7 @@ opt = Options()
 opt.headless = True
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=opt)
 driver.get('http://localhost:1667/')
-time.sleep(3)
+time.sleep(4)
 
 
 def test_data_from_file():
