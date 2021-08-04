@@ -1,0 +1,3 @@
+['We use cookies', 'to remember your preferences', 'and to analyze our', 'traffic']
+['We do not carry ads', 'and will never sell', 'your data to third', 'parties']
+['Please see our Cookie Policy', 'or visit our Privacy Dashboard', 'for more', 'information']
