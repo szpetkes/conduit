@@ -7,14 +7,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 opt = Options()
 opt.headless = True
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=opt)
+driver.get('http://localhost:1667/')
+time.sleep(3)
 
 
 def test_data_from_file():
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=opt)
-
-    driver = webdriver.Chrome()
-    driver.get('http://localhost:1667/')
-
     input_data = ["L", f"SL{random.randint(10, 1000)}@conduit.hu", "Starlord2."]
 
     def registration():
